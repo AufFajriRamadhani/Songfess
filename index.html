@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Songfess Kelas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="/images/logo.png" type="image/x-icon" />
+  </head>
+  <body
+    class="min-h-screen bg-gradient-to-br from-blue-200 via-blue-300 to-blue-400 flex flex-col items-center justify-center p-4"
+  >
+    <header
+      class="w-full max-w-lg flex justify-between items-center p-4 md:hidden"
+    >
+      <div class="text-2xl font-extrabold text-blue-700">Songfess</div>
+      <button id="hamburger-btn" class="text-gray-700 focus:outline-none">
+        <svg
+          class="w-8 h-8"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16m-7 6h7"
+          ></path>
+        </svg>
+      </button>
+    </header>
+
+    <nav
+      id="navbar"
+      class="fixed top-0 right-0 h-full w-64 bg-white p-6 shadow-lg transform translate-x-full transition-transform duration-300 ease-in-out z-40 md:relative md:top-auto md:right-auto md:h-auto md:w-full md:max-w-lg md:flex md:justify-center md:gap-4 md:transform-none md:rounded-full md:mb-8 md:opacity-100"
+    >
+      <button
+        id="close-sidebar-btn"
+        class="absolute top-4 right-4 text-gray-700 focus:outline-none md:hidden"
+      >
+        <svg
+          class="w-8 h-8"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"
+          ></path>
+        </svg>
+      </button>
+
+      <div
+        class="flex flex-col md:flex-row gap-4 md:gap-4 items-center md:items-stretch h-full md:h-auto justify-center"
+      >
+        <button
+          id="nav-home"
+          class="py-2 px-3 rounded-full font-semibold transition-colors duration-300 text-gray-700 hover:bg-gray-100 w-full md:w-auto"
+        >
+          Home
+        </button>
+        <button
+          id="nav-message"
+          class="py-2 px-3 rounded-full font-semibold transition-colors duration-300 text-gray-700 hover:bg-gray-100 w-full md:w-auto"
+        >
+          Songfess
+        </button>
+        <button
+          id="nav-playlist"
+          class="py-2 px-3 rounded-full font-semibold transition-colors duration-300 text-gray-700 hover:bg-gray-100 w-full md:w-auto"
+        >
+          Playlist
+        </button>
+      </div>
+    </nav>
+
+    <div
+      id="overlay"
+      class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden md:hidden"
+    ></div>
+
+    <div
+      id="main-content-wrapper"
+      class="bg-white p-8 md:p-12 rounded-3xl shadow-xl max-w-lg w-full transform transition-all duration-700 ease-out scale-95 opacity-0"
+    >
+      <div id="home-section" class="text-center hidden">
+        <h1
+          class="text-4xl md:text-5xl font-extrabold text-blue-700 mb-6 animate-fade-in-down"
+        >
+          Selamat Datang!
+        </h1>
+        <p
+          class="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed animate-fade-in-up delay-200"
+        >
+          Ini adalah website songfess kelas kita. 🎉 Kirimkan pesan dan lagu
+          favoritmu untuk teman sekelas secara anonim! 💌
+        </p>
+      </div>
+
+      <div id="message-section" class="text-center hidden">
+        <h1
+          class="text-4xl md:text-5xl font-extrabold text-blue-700 mb-4 animate-fade-in-down"
+        >
+          Kirim Songfess 💌
+        </h1>
+        <p
+          class="text-lg md:text-xl text-gray-700 mb-6 leading-relaxed animate-fade-in-up delay-200"
+        >
+          Tuliskan pesanmu di sini! Kamu juga bisa menambahkan lagu Spotify.
+        </p>
+
+        <div
+          class="bg-blue-50 p-6 rounded-2xl border border-blue-200 mb-8 shadow-inner animate-fade-in-up"
+        >
+          <textarea
+            id="new-message-input"
+            placeholder="Tulis pesanmu di sini..."
+            rows="5"
+            class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200 resize-y mb-3"
+          ></textarea>
+
+          <div class="relative mb-3">
+            <input
+              id="spotify-search-input"
+              type="text"
+              placeholder="Cari lagu Spotify (judul lagu/artis)"
+              class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200"
+            />
+            <div
+              id="spotify-search-results"
+              class="absolute z-10 w-full bg-white border border-gray-300 rounded-lg shadow-lg mt-1 max-h-60 overflow-y-auto hidden"
+            ></div>
+          </div>
+
+          <input
+            id="sender-name-input"
+            type="text"
+            placeholder="Nama pengirim (opsional, bisa anonim)"
+            class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200 mb-4"
+          />
+          <button
+            id="send-message-btn"
+            class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center mx-auto"
+          >
+            Kirim Pesan
+          </button>
+          <p id="message-error" class="text-red-600 text-sm mt-4 hidden"></p>
+        </div>
+
+        <h2 class="text-2xl font-bold text-blue-700 mb-6 mt-8">
+          Pesan Songfess:
+        </h2>
+        <div id="messages-container" class="space-y-6">
+          <p class="text-gray-600">Memuat pesan...</p>
+        </div>
+      </div>
+
+      <div id="playlist-section" class="text-center hidden">
+        <h1
+          class="text-4xl md:text-5xl font-extrabold text-blue-700 mb-6 animate-fade-in-down"
+        >
+          Playlist Kelas
+        </h1>
+        <p
+          class="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed animate-fade-in-up delay-200"
+        >
+          Ini adalah playlist yang berisi lagu-lagu dari songfess kita.
+        </p>
+        <div
+          id="spotify-playlist-embed"
+          class="w-full max-w-md mx-auto rounded-xl overflow-hidden shadow-lg animate-fade-in-up delay-400 h-[400px]"
+        ></div>
+        <p class="text-gray-600 text-sm mt-4"></p>
+      </div>
+    </div>
+
+    <div class="mt-8 text-center text-gray-600 text-sm">
+      ID User: <span id="display-user-id">Memuat...</span>
+    </div>
+
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
